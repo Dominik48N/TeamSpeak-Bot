@@ -1,5 +1,13 @@
 package de.dominik48n.teamspeakbot.core.botstrap
 
+import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
+
 fun main() {
+    Thread.currentThread().name = "teamspeak-bot-core"
+    val teamSpeakBotCore = TeamSpeakBotCore()
+
+    Runtime.getRuntime().addShutdownHook(Thread({
+        teamSpeakBotCore.stop()
+    }, "teamspeak-bot-shutdown"))
 
 }
