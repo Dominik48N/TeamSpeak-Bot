@@ -13,7 +13,7 @@ class TeamSpeakBotCore {
         val GSON: Gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         val LOGGER = TeamSpeakBotLoggerFactory.createLogger()
 
-        lateinit var CONFIG: Document
+        lateinit var CORE_CONFIG: Document
     }
 
     fun start() {
@@ -32,7 +32,7 @@ class TeamSpeakBotCore {
         val configFile = File("teamspeakbot", "config.json")
         val config = Document.read(configFile) ?: Document.create(configFile)
 
-        CONFIG = config.getDocument("config")
+        CORE_CONFIG = config.getDocument("config")
     }
 
 }
