@@ -25,6 +25,7 @@ class TeamSpeakBotCore {
     fun stop() {
         LOGGER.info("Stopping TeamSpeakBot...")
 
+        Thread.currentThread().stop()
         exitProcess(0)
     }
 
