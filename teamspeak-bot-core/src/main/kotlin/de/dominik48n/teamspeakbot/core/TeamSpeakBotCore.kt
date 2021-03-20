@@ -1,5 +1,8 @@
 package de.dominik48n.teamspeakbot.core
 
+import com.github.theholywaffle.teamspeak3.TS3ApiAsync
+import com.github.theholywaffle.teamspeak3.TS3Config
+import com.github.theholywaffle.teamspeak3.TS3Query
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.dominik48n.teamspeakbot.core.document.Document
@@ -12,6 +15,9 @@ class TeamSpeakBotCore {
     companion object {
         val GSON: Gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         val LOGGER = TeamSpeakBotLoggerFactory.createLogger()
+        val CONFIG = TS3Config()
+        val QUERY = TS3Query(CONFIG)
+        val API = TS3ApiAsync(QUERY)
 
         lateinit var CORE_CONFIG: Document
     }
@@ -20,6 +26,7 @@ class TeamSpeakBotCore {
         LOGGER.info("Starting TeamSpeakBot...")
 
         this.prepareConfig()
+        this.connectTeamSpeakBot()
     }
 
     fun stop() {
@@ -34,6 +41,17 @@ class TeamSpeakBotCore {
         val config = Document.read(configFile) ?: Document.create(configFile)
 
         CORE_CONFIG = config.getDocument("config")
+    }
+
+    private fun connectTeamSpeakBot() {
+        CONFIG.setHost(CORE_CONFIG.getStringValue("host"))
+        CONFIG.setFloodRate(TS3Query.FloodRate.UNLIMITED)
+
+        QUERY.connect()
+
+        API.login(CORE_CONFIG.getStringValue("login.user"), CORE_CONFIG.getStringValue("login.password"))
+        API.selectVirtualServerByPort(CORE_CONFIG.getIntValue("port"))
+        API.setNickname(CORE_CONFIG.getStringValue("bot.nickname"))
     }
 
 }
