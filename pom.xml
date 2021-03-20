@@ -11,6 +11,7 @@
 
     <modules>
         <module>teamspeak-bot-core</module>
+        <module>teamspeak-bot-logger</module>
     </modules>
 
     <properties>

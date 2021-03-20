@@ -21,9 +21,16 @@
         <project.main.class>de.dominik48n.teamspeakbot.core.botstrap.BootstrapKt</project.main.class>
 
         <teamspeak.api.version>1.2.0</teamspeak.api.version>
+        <logger.version>0.0.1</logger.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>de.dominik48n.teamspeakbot</groupId>
+            <artifactId>teamspeak-bot-logger</artifactId>
+            <version>${logger.version}</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>com.github.theholywaffle</groupId>
             <artifactId>teamspeak3-api</artifactId>
