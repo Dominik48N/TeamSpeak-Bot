@@ -6,6 +6,8 @@ fun main() {
     Thread.currentThread().name = "teamspeak-bot-core"
     val teamSpeakBotCore = TeamSpeakBotCore()
 
+    teamSpeakBotCore.start()
+
     Runtime.getRuntime().addShutdownHook(Thread({
         teamSpeakBotCore.stop()
     }, "teamspeak-bot-shutdown"))
