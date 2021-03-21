@@ -18,7 +18,7 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
 
-        <project.main.class>de.dominik48n.teamspeakbot.core.botstrap.BootstrapKt</project.main.class>
+        <project.main.class>de.dominik48n.teamspeakbot.core.bootstrap.BootstrapKt</project.main.class>
 
         <teamspeak.api.version>1.2.0</teamspeak.api.version>
         <kotlin.version>1.4.31</kotlin.version>
