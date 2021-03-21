@@ -5,5 +5,8 @@
     "bot.nickname": "◥◣━━━━ TeamSpeakBot ━━━━◢◤",
     "host": "127.0.0.1",
     "port": 9987
+  },
+  "messages": {
+    "join-message": "\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬● [color=#5acbff][b]Information[b][/color] ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n    ● [b]Welcome {0} to the TeamSpeak server![/b] \n    ● The TeamSpeak Bot was developed by [url=https://dominik48n.de]Dominik48N[/url].\n\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬● [color=#5acbff][b]Information[/b][/color] ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬"
   }
 }

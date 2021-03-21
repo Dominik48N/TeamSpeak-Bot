@@ -2,6 +2,8 @@ package de.dominik48n.teamspeakbot.core.event
 
 import com.github.theholywaffle.teamspeak3.TS3ApiAsync
 import com.github.theholywaffle.teamspeak3.api.event.*
+import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
+import java.text.MessageFormat
 
 class TeamSpeakEvent(private val api: TS3ApiAsync) {
 
@@ -14,7 +16,7 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
             }
 
             override fun onClientJoin(event: ClientJoinEvent) {
-
+                api.sendPrivateMessage(event.clientId, MessageFormat.format(TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("join-message"), event.clientNickname))
             }
 
             override fun onClientLeave(event: ClientLeaveEvent) {

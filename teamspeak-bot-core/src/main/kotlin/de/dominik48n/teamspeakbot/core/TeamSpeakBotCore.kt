@@ -20,6 +20,7 @@ class TeamSpeakBotCore {
         val QUERY = TS3Query(CONFIG)
         val API = TS3ApiAsync(QUERY)
 
+        lateinit var MESSAGE_CONFIG: Document
         lateinit var CORE_CONFIG: Document
     }
 
@@ -41,6 +42,7 @@ class TeamSpeakBotCore {
         val configFile = File("teamspeakbot", "config.json")
         val config = Document.read(configFile) ?: Document.create(configFile)
 
+        MESSAGE_CONFIG = config.getDocument("messages")
         CORE_CONFIG = config.getDocument("config")
     }
 
