@@ -1,17 +1,28 @@
 package de.dominik48n.teamspeakbot.core.event
 
 import com.github.theholywaffle.teamspeak3.TS3ApiAsync
+import com.github.theholywaffle.teamspeak3.api.TextMessageTargetMode
 import com.github.theholywaffle.teamspeak3.api.event.*
 import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
 import java.text.MessageFormat
 
 class TeamSpeakEvent(private val api: TS3ApiAsync) {
 
+    private val queryId = api.whoAmI().get().id
+
     fun init() {
         this.api.registerAllEvents()
         this.api.addTS3Listeners(object: TS3Listener {
 
             override fun onTextMessage(event: TextMessageEvent) {
+                if (event.targetMode != TextMessageTargetMode.CLIENT) return
+                if (event.invokerId == queryId) return
+                val message = event.message
+
+                if (message.equals("!help", true)) {
+                    api.sendPrivateMessage(event.invokerId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("help-message"))
+                    return
+                }
 
             }
 
