@@ -1,4 +1,4 @@
-package de.dominik48n.teamspeakbot.core.botstrap
+package de.dominik48n.teamspeakbot.core.bootstrap
 
 import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
 
@@ -11,5 +11,4 @@ fun main() {
     Runtime.getRuntime().addShutdownHook(Thread({
         teamSpeakBotCore.stop()
     }, "teamspeak-bot-shutdown"))
-
 }
