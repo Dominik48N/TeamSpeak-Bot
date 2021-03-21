@@ -11,6 +11,9 @@ class SupportModule(private val api: TS3ApiAsync) {
 
     val supporters: HashMap<Int, ClientInfo> = HashMap()
 
+    /**
+     * This method edits the support channel so that users can see that support is open.
+     */
     fun openSupport() {
         val options: HashMap<ChannelProperty, String> = java.util.HashMap()
 
@@ -21,6 +24,9 @@ class SupportModule(private val api: TS3ApiAsync) {
         api.editChannel(TeamSpeakBotCore.CORE_CONFIG.getIntValue("channelid.support"), options)
     }
 
+    /**
+     * This method edits the support channel so that users can see that support is closed.
+     */
     fun closeSupport() {
         val options: HashMap<ChannelProperty, String> = java.util.HashMap()
 
