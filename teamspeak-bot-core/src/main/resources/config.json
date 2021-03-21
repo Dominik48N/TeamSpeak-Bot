@@ -6,6 +6,8 @@
     "access.supportadmin.servergroupid": 2,
     "access.supporter.servergroupid": 1,
     "channelid.support": 1,
+    "channelid.afk": 2,
+    "afk.idletimeformove": 60,
     "host": "127.0.0.1",
     "port": 9987
   },
@@ -21,6 +23,7 @@
     "support.close.channel.name": "Support [Closed]",
     "support.close.channel.description": "[hr][center][size=20][b][color=#5acbff]Support[/color] [color=grey][[/color][color=red]Closed[/color][color=grey]][/color][/b][/size][/center][hr]",
     "support.poke": "{0} needs support.",
-    "support.joined": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] A supporter was notified."
+    "support.joined": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] A supporter was notified.",
+    "afk.move.message": "[color=grey][b][[color=#00aa00]AFK[/color]][/b][/color] It would appear that you are AFK. Therefore you were moved into the AFK room."
   }
 }
