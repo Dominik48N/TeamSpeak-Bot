@@ -24,6 +24,14 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
                     return
                 }
 
+                if (message.equals("!bot", true) ||
+                    message.equals("!info", true) ||
+                    message.equals("!dev", true) ||
+                    message.equals("!developer", true)) {
+                    api.sendPrivateMessage(event.invokerId, "The TeamSpeak Bot was developed by [url=https://dominik48n.de]Dominik48N[/url].")
+                    return
+                }
+
             }
 
             override fun onClientJoin(event: ClientJoinEvent) {
