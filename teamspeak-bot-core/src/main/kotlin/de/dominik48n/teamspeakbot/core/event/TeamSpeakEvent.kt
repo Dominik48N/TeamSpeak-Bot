@@ -40,43 +40,48 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
                     api.sendPrivateMessage(event.invokerId, "The TeamSpeak Bot was developed by [url=https://dominik48n.de]Dominik48N[/url].")
                     return
                 }
-                val clientId = event.invokerId
-                val client = api.getClientInfo(clientId).get()
 
-                if (message.equals("!support", true) && client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supporter.servergroupid"))) {
+                // Check if the support module is activated
+                if (TeamSpeakBotCore.MODULE_CONFIG.getBooleanValue("support")) {
+                    val clientId = event.invokerId
+                    val client = api.getClientInfo(clientId).get()
 
-                    // Check if the client is in the supporter list
-                    if (supportModule.supporters.containsKey(clientId)) {
-                        // Remove the client from the supporter list
-                        supportModule.supporters.remove(clientId)
+                    if (message.equals("!support", true) &&
+                        client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supporter.servergroupid"))) {
 
-                        api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("quit-support"))
-                    } else {
-                        // Put the client in the supporter list
-                        supportModule.supporters[clientId] = client
+                        // Check if the client is in the supporter list
+                        if (supportModule.supporters.containsKey(clientId)) {
+                            // Remove the client from the supporter list
+                            supportModule.supporters.remove(clientId)
 
-                        api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("join-support"))
-                    }
+                            api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("quit-support"))
+                        } else {
+                            // Put the client in the supporter list
+                            supportModule.supporters[clientId] = client
 
-                    return
-                }
+                            api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("join-support"))
+                        }
 
-                if (client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supportadmin.servergroupid"))) {
-
-                    // Open the support channel
-                    if (message.equals("!open", true)) {
-                        supportModule.openSupport()
-                        api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("open-support"))
                         return
                     }
 
-                    // Close the support channel
-                    if (message.equals("!close", true)) {
-                        supportModule.closeSupport()
-                        api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("close-support"))
-                        return
-                    }
+                    if (client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supportadmin.servergroupid"))) {
 
+                        // Open the support channel
+                        if (message.equals("!open", true)) {
+                            supportModule.openSupport()
+                            api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("open-support"))
+                            return
+                        }
+
+                        // Close the support channel
+                        if (message.equals("!close", true)) {
+                            supportModule.closeSupport()
+                            api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("close-support"))
+                            return
+                        }
+
+                    }
                 }
 
             }
