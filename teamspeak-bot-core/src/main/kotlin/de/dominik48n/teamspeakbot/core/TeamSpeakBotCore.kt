@@ -6,6 +6,7 @@ import com.github.theholywaffle.teamspeak3.TS3Query
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import de.dominik48n.teamspeakbot.core.document.Document
+import de.dominik48n.teamspeakbot.core.event.TeamSpeakEvent
 import de.dominik48n.teamspeakbot.logger.TeamSpeakBotLoggerFactory
 import java.io.File
 import kotlin.system.exitProcess
@@ -52,6 +53,8 @@ class TeamSpeakBotCore {
         API.login(CORE_CONFIG.getStringValue("login.user"), CORE_CONFIG.getStringValue("login.password"))
         API.selectVirtualServerByPort(CORE_CONFIG.getIntValue("port"))
         API.setNickname(CORE_CONFIG.getStringValue("bot.nickname"))
+
+        TeamSpeakEvent(API).init()
     }
 
 }
