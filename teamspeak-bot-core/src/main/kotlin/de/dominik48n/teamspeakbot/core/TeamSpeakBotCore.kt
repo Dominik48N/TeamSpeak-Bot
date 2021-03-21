@@ -16,6 +16,7 @@ class TeamSpeakBotCore {
     companion object {
         val GSON: Gson = GsonBuilder().setPrettyPrinting().disableHtmlEscaping().create()
         val LOGGER = TeamSpeakBotLoggerFactory.createLogger()
+        var RUNNING = false
         val CONFIG = TS3Config()
         val QUERY = TS3Query(CONFIG)
         val API = TS3ApiAsync(QUERY)
@@ -27,12 +28,16 @@ class TeamSpeakBotCore {
     fun start() {
         LOGGER.info("Starting TeamSpeakBot...")
 
+        RUNNING = true
+
         this.prepareConfig()
         this.connectTeamSpeakBot()
     }
 
     fun stop() {
         LOGGER.info("Stopping TeamSpeakBot...")
+
+        RUNNING = false
 
         Thread.currentThread().stop()
         exitProcess(0)

@@ -4,6 +4,7 @@ import com.github.theholywaffle.teamspeak3.TS3ApiAsync
 import com.github.theholywaffle.teamspeak3.api.TextMessageTargetMode
 import com.github.theholywaffle.teamspeak3.api.event.*
 import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
+import de.dominik48n.teamspeakbot.core.module.AFKMoveModule
 import de.dominik48n.teamspeakbot.core.module.SupportModule
 import java.text.MessageFormat
 
@@ -11,9 +12,12 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
 
     private val queryId = api.whoAmI().get().id
 
+    private val afkMoveModule = AFKMoveModule(api)
     private val supportModule = SupportModule(api)
 
     fun init() {
+        this.afkMoveModule.startAFKCheck()
+
         this.api.registerAllEvents()
         this.api.addTS3Listeners(object: TS3Listener {
 
