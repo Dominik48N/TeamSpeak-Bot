@@ -22,6 +22,7 @@ class TeamSpeakBotCore {
         val API = TS3ApiAsync(QUERY)
 
         lateinit var MESSAGE_CONFIG: Document
+        lateinit var MODULE_CONFIG: Document
         lateinit var CORE_CONFIG: Document
     }
 
@@ -32,6 +33,9 @@ class TeamSpeakBotCore {
 
         this.prepareConfig()
         this.connectTeamSpeakBot()
+
+        // Initialize the events
+        TeamSpeakEvent(API).init()
     }
 
     fun stop() {
@@ -48,6 +52,7 @@ class TeamSpeakBotCore {
         val config = Document.read(configFile) ?: Document.create(configFile)
 
         MESSAGE_CONFIG = config.getDocument("messages")
+        MODULE_CONFIG = config.getDocument("modules")
         CORE_CONFIG = config.getDocument("config")
     }
 
@@ -60,8 +65,6 @@ class TeamSpeakBotCore {
         API.login(CORE_CONFIG.getStringValue("login.user"), CORE_CONFIG.getStringValue("login.password"))
         API.selectVirtualServerByPort(CORE_CONFIG.getIntValue("port"))
         API.setNickname(CORE_CONFIG.getStringValue("bot.nickname"))
-
-        TeamSpeakEvent(API).init()
     }
 
 }

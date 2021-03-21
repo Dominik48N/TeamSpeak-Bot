@@ -6,6 +6,7 @@ import de.dominik48n.teamspeakbot.core.TeamSpeakBotCore
 class AFKMoveModule(private val api: TS3ApiAsync) {
 
     fun startAFKCheck() {
+        if (!TeamSpeakBotCore.MODULE_CONFIG.getBooleanValue("afk-mover")) return // Check if the afk mover module is activated
         val afkChannel = TeamSpeakBotCore.CORE_CONFIG.getIntValue("channelid.afk")
         val idleTime = TeamSpeakBotCore.CORE_CONFIG.getIntValue("afk.idletimeformove") * 1000
 
