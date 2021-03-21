@@ -32,10 +32,7 @@ class TeamSpeakBotCore {
         RUNNING = true
 
         this.prepareConfig()
-        this.connectTeamSpeakBot()
-
-        // Initialize the events
-        TeamSpeakEvent(API).init()
+        this.prepareTeamspeakBot()
     }
 
     fun stop() {
@@ -56,7 +53,7 @@ class TeamSpeakBotCore {
         CORE_CONFIG = config.getDocument("config")
     }
 
-    private fun connectTeamSpeakBot() {
+    private fun prepareTeamspeakBot() {
         CONFIG.setHost(CORE_CONFIG.getStringValue("host"))
         CONFIG.setFloodRate(TS3Query.FloodRate.UNLIMITED)
 
@@ -65,6 +62,9 @@ class TeamSpeakBotCore {
         API.login(CORE_CONFIG.getStringValue("login.user"), CORE_CONFIG.getStringValue("login.password"))
         API.selectVirtualServerByPort(CORE_CONFIG.getIntValue("port"))
         API.setNickname(CORE_CONFIG.getStringValue("bot.nickname"))
+
+        // Initialize the events
+        TeamSpeakEvent(API).init()
     }
 
 }
