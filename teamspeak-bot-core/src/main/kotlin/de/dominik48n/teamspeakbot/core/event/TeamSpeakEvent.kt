@@ -22,11 +22,13 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
                 if (event.invokerId == queryId) return
                 val message = event.message
 
+                // Send a help message
                 if (message.equals("!help", true)) {
                     api.sendPrivateMessage(event.invokerId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("help-message"))
                     return
                 }
 
+                // TeamSpeak Bot Developer credits
                 if (message.equals("!bot", true) ||
                     message.equals("!info", true) ||
                     message.equals("!dev", true) ||
@@ -39,11 +41,14 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
 
                 if (message.equals("!support", true) && client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supporter.servergroupid"))) {
 
+                    // Check if the client is in the supporter list
                     if (supportModule.supporters.containsKey(clientId)) {
+                        // Remove the client from the supporter list
                         supportModule.supporters.remove(clientId)
 
                         api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("quit-support"))
                     } else {
+                        // Put the client in the supporter list
                         supportModule.supporters[clientId] = client
 
                         api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("join-support"))
@@ -54,12 +59,14 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
 
                 if (client.isInServerGroup(TeamSpeakBotCore.CORE_CONFIG.getIntValue("access.supportadmin.servergroupid"))) {
 
+                    // Open the support channel
                     if (message.equals("!open", true)) {
                         supportModule.openSupport()
                         api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("open-support"))
                         return
                     }
 
+                    // Close the support channel
                     if (message.equals("!close", true)) {
                         supportModule.closeSupport()
                         api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("close-support"))
@@ -71,6 +78,7 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
             }
 
             override fun onClientJoin(event: ClientJoinEvent) {
+                // Client join message
                 api.sendPrivateMessage(event.clientId, MessageFormat.format(TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("join-message"), event.clientNickname))
             }
 
@@ -91,6 +99,22 @@ class TeamSpeakEvent(private val api: TS3ApiAsync) {
             }
 
             override fun onClientMoved(event: ClientMovedEvent) {
+                val channelId = event.targetChannelId
+
+                // Support Channel
+                if (TeamSpeakBotCore.CORE_CONFIG.getIntValue("channelid.support") == channelId) {
+                    val clientId = event.clientId
+                    val name = api.getClientInfo(clientId).get().nickname
+
+                    // Poke all supporters
+                    for (supporter in supportModule.supporters) {
+                        api.pokeClient(supporter.key, MessageFormat.format(TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("support.poke"), name))
+                    }
+
+                    // Send a privat message to the client
+                    api.sendPrivateMessage(clientId, TeamSpeakBotCore.MESSAGE_CONFIG.getStringValue("support.joined"))
+                    return
+                }
 
             }
 
