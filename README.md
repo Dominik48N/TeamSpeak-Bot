@@ -6,7 +6,7 @@ Please make sure that your TeamSpeak Query and TeamSpeak Connection data are ent
 If you notice a bug or if you have an idea what you can add to the TeamSpeak Bot, please create an [issue](https://github.com/Dominik48N/TeamSpeak-Bot/issues/new/choose) here in Git and give it the appropriate label.
 
 ## Installation
-* Download the jar file.
+* [Download the jar file.](https://github.com/Dominik48N/TeamSpeak-Bot/releases)
 * Upload the jar file to your server.
 * Execute the jar file with the command `java -jar {filename} .jar`
 * Set your TeamSpeak Connection and TeamSpeak Query data in config.json so that the bot connects.
