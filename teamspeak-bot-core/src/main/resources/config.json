@@ -1,0 +1,33 @@
+{
+  "config": {
+    "login.user": "serveradmin",
+    "login.password": "queryPassword",
+    "bot.nickname": "◥◣━━━━ TeamSpeakBot ━━━━◢◤",
+    "access.supportadmin.servergroupid": 2,
+    "access.supporter.servergroupid": 1,
+    "channelid.support": 1,
+    "channelid.afk": 2,
+    "afk.idletimeformove": 60,
+    "host": "127.0.0.1",
+    "port": 9987
+  },
+  "modules": {
+    "afk-mover": true,
+    "support": true
+  },
+  "messages": {
+    "join-message": "\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬● [color=#5acbff][b]Information[b][/color] ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬\n\n    ● [b]Welcome {0} to the TeamSpeak server![/b] \n    ● The TeamSpeak Bot was developed by [url=https://dominik48n.de]Dominik48N[/url].\n\n▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬● [color=#5acbff][b]Information[/b][/color] ●▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬",
+    "help-message": "\n[color=#5acbff][b]Commands[b][/color]\n[b]!help[/b] Show all commands",
+    "join-support": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] You are now assigned to TeamSpeak Support.",
+    "quit-support": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] You are no longer assigned to TeamSpeak Support.",
+    "open-support": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] You opened the support!",
+    "close-support": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] You closed the support!",
+    "support.open.channel.name": "Support [Opened]",
+    "support.open.channel.description": "[hr][center][size=20][b][color=#5acbff]Support[/color] [color=grey][[/color][color=green]Opened[/color][color=grey]][/color][/b][/size][/center][hr]",
+    "support.close.channel.name": "Support [Closed]",
+    "support.close.channel.description": "[hr][center][size=20][b][color=#5acbff]Support[/color] [color=grey][[/color][color=red]Closed[/color][color=grey]][/color][/b][/size][/center][hr]",
+    "support.poke": "{0} needs support.",
+    "support.joined": "[color=grey][b][[color=#5acbff]Support[/color]][/b][/color] A supporter was notified.",
+    "afk.move.message": "[color=grey][b][[color=#00aa00]AFK[/color]][/b][/color] It would appear that you are AFK. Therefore you were moved into the AFK room."
+  }
+}
